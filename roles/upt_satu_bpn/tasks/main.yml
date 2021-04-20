@@ -1,0 +1,67 @@
+---
+- name: Backup `oskari-ext.properties` Oskari settings file if backup file `oskari-ext.properties.orig` does not exist
+  shell: "cp {{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties {{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties.orig"
+  args:
+    creates: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties.orig"
+
+- name: Copy `oskari-ext.properties` settings file for Oskari from template
+  template:
+    src: ../templates/oskari-ext.properties.j2
+    dest: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Cloning UPT-GUI repository
+  git: 
+    #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-UrbanPerformance.git
+    repo: https://github.com/amilcar-capsus/UPT-GUI.git
+    dest: "{{ oskari_dir }}/UPT-GUI"
+    clone: yes
+
+- name: Cloning UPT-Server-Extension repository
+  git: 
+    #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-Distance-Module.git
+    repo: https://github.com/amilcar-capsus/UPT-Server-Extension.git
+    dest: "{{ oskari_dir }}/UPT-Server-Extension"
+    clone: yes
+
+- name: Run npm install for UPT-GUI dependencies
+  shell: |
+    cd {{ oskari_dir }}/UPT-GUI
+    sudo git checkout satu-integration
+    sudo npm install
+    exit
+
+- name: Building the UPT-GUI for SatuDataportal
+  shell: |
+    cd {{ oskari_dir }}/UPT-GUI
+    sudo ng build --prod --output-hashing none
+    exit
+
+- name: Copy build artifacts to oskari-frontend
+  shell: |
+    sudo cp -r {{ oskari_dir }}/UPT-GUI/dist/PLID {{ oskari_dir }}/oskari-application-bpn/dist/wbidp/geoportal
+
+- name: Checkout UPT-Server-Extension for SatuDataportal
+  shell: |
+    cd {{ oskari_dir }}/UPT-Server-Extension
+    sudo git checkout satu-integration
+    exit
+
+- name: Run UPT-Server-Extension SQL scripts
+  become_user: postgres
+  become_method: sudo
+  environment:
+    PGPASSWORD: '{{ oskari_db_pw }}'
+  shell: |
+    psql -h localhost -U oskari -f {{ oskari_dir }}/UPT-Server-Extension/app-resources/src/main/resources/flyway/example/run-upt-scripts.sql -d oskaridb
+
+- name: Build oskari-map.war file
+  shell: |
+    cd {{ oskari_dir }}/UPT-Server-Extension
+    sudo mvn clean install
+
+- name: Copy oskari-map.war to webapps of oskari-server directory
+  shell: |
+    sudo cp {{ oskari_dir }}/UPT-Server-Extension/webapp-map/target/oskari-map.war {{ oskari_dir }}/webapps
