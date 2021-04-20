@@ -13,6 +13,7 @@ to serve static html files and images.
   <Set name="resourceBase"><SystemProperty name="jetty.base" default="."/>/oskari-application-dps</Set>
   <Set name="handler">
     <New class="org.eclipse.jetty.server.handler.ResourceHandler">
+      <Set name="directoriesListed">false</Set>
       <Set name="welcomeFiles">
         <Array type="String">
           <Item>README.md</Item>

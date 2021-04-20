@@ -54,10 +54,12 @@ ckan_db: {
   name: "ckan_default",
   host: "localhost"
 }
-ckan_ckanapi_version: 4.3
+ckan_ckanapi_version: 4.5
 ckan_ckanapi_organizations_dump_file: "/tmp/ckanorgsdump.jsonl"
 ckan_ckanapi_users_dump_file: "/tmp/ckanusersdump.jsonl"
 ckan_ckanapi_datasets_dump_file: "/tmp/ckandatasetsdump.jsonl"
+ckan_ckanapi_datasets_secondary_dump_file: "/tmp/ckandatasetsdump2.jsonl"
+ckan_sysadmin_api_key: "CKAN_SYSADMIN_API_KEY"
 # Variables for CKAN extras below
 ckanext_spatial_version: "4ac25f19aa4eb9c798451f5eeb3084f907ccc003"
 ckanext_spatial_src_url: "git+https://github.com/ckan/ckanext-spatial.git@{{ ckanext_spatial_version }}#egg=ckanext-spatial"

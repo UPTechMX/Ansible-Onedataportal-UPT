@@ -57,26 +57,35 @@ SSH to the target server and perform the following steps:
 * Configure the mandatory playbook variables
   * ```nano vars_provision_server.yml```
     ```
-    server_timezone: set this to the server's timezone (default is Asia/Jakarta)
+    server_timezone: set this to the server's timezone (default is Asia/Makassar)
     ```
   * ```nano vars_postgresql.yml```
     ```
-    postgres_user_password: the password for the default postgres role
+    (Optional, recommended) postgres_user_password: change the password for the default postgres role
     ```
   * ```nano vars_ckan.yml```
     ```
     ckan_site_url: set this to the IP address or domain name of the server where CKAN will be accessed (default is http://192.168.1.200)
-    ckan_admin.username: set the username for the CKAN admin user (default is admin)
-    ckan_admin.password: set the default password for the CKAN admin user
-    (Optional) ckan_max_resource_size: change the default resource file size upload limit
-    (Optional) ckan_max_image_size: change the default image file size upload limit
+    (Optional, recommended) ckan_admin.username: set the username for the CKAN admin user (default is admin)
+    (Optional, recommended) ckan_admin.password: set the default password for the CKAN admin user
+    (Optional) ckan_max_resource_size: change the default resource file size upload limit (default is 100 MB)
+    (Optional) ckan_max_image_size: change the default image file size upload limit (default is 10 MB)
     ```
   * ```nano vars_oskari.yml```
     ```
     oskari_domain: set this to the IP address or domain name of the server where Oskari will be accessed (default is http://192.168.1.200:8080)
     ```
 * Run the playbooks
-    * One by one
+    * Recommended method: run the install all playbook to install everything in order
+      * This will run the playbooks above in correct order from 0 to 6
+        ```
+        cd /opt/ansible-onedataportal
+        # become root user
+        sudo su
+        ansible-playbook -K -i inventory install_all.yml
+          BECOME password: enter the user's sudo password
+        ```
+    * Or one by one
       * Must be run in the order of the filename
         ```
         cd /opt/ansible-onedataportal
@@ -89,15 +98,6 @@ SSH to the target server and perform the following steps:
         ansible-playbook -K -i inventory 3_install_ckan.yml
         ansible-playbook -K -i inventory 4_install_ckan_extras.yml
         ansible-playbook -K -i inventory 5_install_oskari.yml
-        ```
-    * Or run the install all playbook to install everything in order
-      * This will run the playbooks above in correct order from 0 to 6
-        ```
-        cd /opt/ansible-onedataportal
-        # become root user
-        sudo su
-        ansible-playbook -K -i inventory install_all.yml
-          BECOME password: enter the user's sudo password
         ```
     * NOTE: to speed up installation copy `solr-6.5.1.tgz`, `jetty-9.4.12-oskari.zip`, `geoserver-2.13.2-war.zip`, and `oskari-map.war` to /tmp to skip the long tasks for downloading and building
     * Optional: install the development tools for customizing/building Oskari components

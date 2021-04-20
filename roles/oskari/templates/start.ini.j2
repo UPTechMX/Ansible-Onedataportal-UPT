@@ -175,6 +175,11 @@
 ## HTTP Compliance: RFC7230, RFC7230_LEGACY, RFC2616, RFC2616_LEGACY, LEGACY or CUSTOMn
 # jetty.http.compliance=RFC7230_LEGACY
 
+## 20210114 required when Oskari and GeoServer are not running on the same server
+## for instance Oskari on Jetty and GeoServer on Tomcat
+## reference: https://docs.geotools.org/latest/userguide/library/referencing/order.html
+-Dorg.geotools.referencing.forceXY=true
+
 # add to bottom
 # ---------------------------------------
 # Module: http-forwarded
