@@ -29,24 +29,24 @@
 - name: Run npm install for UPT-GUI dependencies
   shell: |
     cd {{ oskari_dir }}/UPT-GUI
-    sudo git checkout satu-integration
-    sudo npm install
+    git checkout satu-integration
+    npm install
     exit
 
 - name: Building the UPT-GUI for SatuDataportal
   shell: |
     cd {{ oskari_dir }}/UPT-GUI
-    sudo ng build --prod --output-hashing none
+    ng build --prod --output-hashing none
     exit
 
 - name: Copy build artifacts to oskari-frontend
   shell: |
-    sudo cp -r {{ oskari_dir }}/UPT-GUI/dist/PLID {{ oskari_dir }}/oskari-application-bpn/dist/wbidp/geoportal
+    cp -r {{ oskari_dir }}/UPT-GUI/dist/PLID {{ oskari_dir }}/oskari-application-bpn/dist/wbidp/geoportal
 
 - name: Checkout UPT-Server-Extension for SatuDataportal
   shell: |
     cd {{ oskari_dir }}/UPT-Server-Extension
-    sudo git checkout satu-integration
+    git checkout satu-integration
     exit
 
 - name: Run UPT-Server-Extension SQL scripts
@@ -60,8 +60,8 @@
 - name: Build oskari-map.war file
   shell: |
     cd {{ oskari_dir }}/UPT-Server-Extension
-    sudo mvn clean install
+    mvn clean install
 
 - name: Copy oskari-map.war to webapps of oskari-server directory
   shell: |
-    sudo cp {{ oskari_dir }}/UPT-Server-Extension/webapp-map/target/oskari-map.war {{ oskari_dir }}/webapps
+    cp {{ oskari_dir }}/UPT-Server-Extension/webapp-map/target/oskari-map.war {{ oskari_dir }}/webapps
