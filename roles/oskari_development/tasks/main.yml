@@ -7,7 +7,11 @@
   shell: |
     curl -sL https://deb.nodesource.com/setup_{{ oskari_development_node_version|quote }}.x | sudo -E bash -
   args:
-    warn: false
+    warn: 
+    
+- name: Enable Node `{{ oskari_development_node_version }}.x` LTS repository
+  shell: |
+    sudo npm install -g @angular/cli
 
 - name: Install Oskari development prerequisite packages
   package:
