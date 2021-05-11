@@ -7,11 +7,7 @@
   shell: |
     curl -sL https://deb.nodesource.com/setup_{{ oskari_development_node_version|quote }}.x | sudo -E bash -
   args:
-    warn: 
-    
-- name: Enable Node `{{ oskari_development_node_version }}.x` LTS repository
-  shell: |
-    npm install -g @angular/cli
+    warn: false
 
 - name: Install Oskari development prerequisite packages
   package:
@@ -21,6 +17,10 @@
    - openjdk-8-jdk
    - maven
    - nodejs
+
+- name: Install Angular CLI
+  shell: |
+    npm install -g @angular/cli
 
 - name: Set JAVA_HOME environment variable
   lineinfile:
