@@ -11,7 +11,7 @@
     
 - name: Enable Node `{{ oskari_development_node_version }}.x` LTS repository
   shell: |
-    sudo npm install -g @angular/cli
+    npm install -g @angular/cli
 
 - name: Install Oskari development prerequisite packages
   package:
