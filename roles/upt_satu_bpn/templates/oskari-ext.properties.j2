@@ -1,4 +1,3 @@
-
 ##################################
 # Flyway config
 ##################################
@@ -15,9 +14,9 @@ db.additional.modules=myplaces, userlayer, example
 # Use autorepair to fix an issue with SQL-script checksums.
 # Checksums fail if an updated war-file includes different line-endings than the original one.
 # Note! This disable the guard against user-modified scripts so use with caution.
-db.flyway.autorepair=true
+#db.flyway.autorepair=true
 # Uncomment to allow application start even if there are migration problems
-db.ignoreMigrationFailures=true
+#db.ignoreMigrationFailures=true
 
 ##################################
 # Environment config
@@ -252,6 +251,53 @@ projectionDefs.url = http://spatialreference.org/ref/epsg/
 
 # Api key for posting feedback (Open311 api_key parameter value, only required for posting user's  feeback data)
 # feedback.open311.key=xyz
+
+
+##################################
+# CKAN-Oskari Integration Setup
+##################################
+oskari.scheduler.job.SynchronizeUserDataJob.cronLine={{ oskari_synchronizeuserdatajob_cronline }}
+oskari.scheduler.job.SynchronizeLayerDataJob.cronLine={{ oskari_synchronizelayerdatajob_cronline }}
+ckan.integration.db.url=jdbc:postgresql://{{ ckan_db.host }}:5432/{{ ckan_db.name }}
+ckan.integration.db.truncate=false
+ckan.integration.db.username={{ ckan_db.username }}
+ckan.integration.db.password={{ ckan_db.password }}
+ckan.integration.ckanapi.dump.organizations={{ ckan_ckanapi_organizations_dump_file }}
+ckan.integration.ckanapi.dump.users={{ ckan_ckanapi_users_dump_file }}
+ckan.integration.ckanapi.dump.datasets={{ ckan_ckanapi_datasets_dump_file }}
+ckan.integration.ckanapi.dump.datasets.secondary={{ ckan_ckanapi_datasets_secondary_dump_file }}
+ckan.integration.ckanapi.sysadmin.apikey={{ ckan_sysadmin_api_key }}
+ckan.integration.ckanapi.shp.resourceworkspaces=true
+ckan.integration.ckanapi.shp.forceproxy=true
+ckan.integration.ckanapi.geotiff.forceproxy=true
+##################################
+# Download Bundle Settings
+##################################
+oskari.wfs.download.folder.name={{ install_dir_oskari }}/oskari-server/webapps/downloads
+oskari.wfs.download.normal.way.downloads=rectangle
+oskari.wfs.download.smtp.host=localhost
+oskari.wfs.download.smtp.port=25
+oskari.wfs.download.email.from={{ ckan_smtp_mail_from }}
+oskari.wfs.download.email.subject=Download service
+oskari.wfs.download.email.header=
+oskari.wfs.download.email.message=The data you ordered can be downloaded at:\n
+oskari.wfs.download.email.footer={LINEBREAK}The download address is valid for 10 days.
+oskari.wfs.download.email.message.datadescription={LINEBREAK}Do not reply to this email.{LINEBREAK}{LINEBREAK}
+oskari.wfs.download.email.datadescription_link=
+#oskari.wfs.download.link.url.prefix=https://localhost:8080/downloads/
+oskari.wfs.download.link.url.prefix={{ oskari_domain }}/downloads/
+oskari.wfs.service.url={{ oskari_wfs_service_url }}
+oskari.wfs.error.message=Error in download service service, please try again later.
+oskari.wfs.download.error.report.support.email={{ ckan_email_to }}
+oskari.wfs.download.error.report.subject=Error in download service
+##################################
+# Content Editor Bundle Settings
+##################################
+permission.types = EDIT_LAYER_CONTENT
+permission.EDIT_LAYER_CONTENT.name.fi=Edit layer
+permission.EDIT_LAYER_CONTENT.name.en=Edit layer
+permission.EDIT_LAYER_CONTENT.name.id=Edit layer
+permission.EDIT_LAYER_CONTENT.name.in=Edit layer
 
 ##################################
 # UPT Modules Settings
