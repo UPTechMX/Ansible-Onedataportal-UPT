@@ -113,7 +113,7 @@
     virtualenv: "{{ ckan_virtualenv }}"
     state: present
 
-- name: Check if spatial_metadata and spatial_query plugins are already enabled in production.ini
+- name: Check if spatial_metadata and spatial_query extensions are already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*spatial_metadata spatial_query.*$'
@@ -122,7 +122,7 @@
   changed_when: false
   register: spatial_plugins_enabled
 
-- name: Enable spatial_metadata and spatial_query plugins in production.ini
+- name: Enable spatial_metadata and spatial_query extensions in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -175,7 +175,7 @@
     line: ckan.harvest.mq.type = redis
     state: present
 
-- name: Check if harvest ckan_harvester csw_harvester waf_harvester doc_harvester plugins are already enabled in production.ini
+- name: Check if harvest ckan_harvester csw_harvester waf_harvester doc_harvester extensions are already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*harvest ckan_harvester csw_harvester waf_harvester doc_harvester.*$'
@@ -184,7 +184,7 @@
   changed_when: false
   register: harvest_plugins_enabled
 
-- name: Enable harvest ckan_harvester csw_harvester waf_harvester doc_harvester plugins in production.ini
+- name: Enable harvest ckan_harvester csw_harvester waf_harvester doc_harvester extensions in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -252,7 +252,7 @@
       ckanext.geoview.basemaps = %(here)s/basemaps.json
   notify: reload apache2
 
-- name: Check if resource_proxy, geo_view, geojson_view, wmts_view, shp_view plugins are already enabled in production.ini
+- name: Check if resource_proxy, geo_view, geojson_view, wmts_view, shp_view extensions are already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*resource_proxy geo_view geojson_view wmts_view shp_view.*$'
@@ -261,7 +261,7 @@
   changed_when: false
   register: geoview_plugins_enabled
 
-- name: Enable resource_proxy, geo_view, geojson_view, wmts_view, shp_view plugins in production.ini
+- name: Enable resource_proxy, geo_view, geojson_view, wmts_view, shp_view extensions in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -492,7 +492,7 @@
       ckanext.ags_view_proxy = '{}'
   notify: reload apache2
 
-- name: Check if ags_fs_view, ags_ms_view plugins are already enabled in production.ini
+- name: Check if ags_fs_view, ags_ms_view extensions are already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*ags_fs_view ags_ms_view.*$'
@@ -501,7 +501,7 @@
   changed_when: false
   register: agsview_plugins_enabled
 
-- name: Enable ags_fs_view, ags_ms_view plugins in production.ini
+- name: Enable ags_fs_view, ags_ms_view extensions in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -522,7 +522,7 @@
     editable: yes
     state: present
 
-- name: Check if pdf_view plugin is already enabled in production.ini
+- name: Check if pdf_view extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*pdf_view.*$'
@@ -531,7 +531,7 @@
   changed_when: false
   register: pdfview_plugin_enabled
 
-- name: Enable pdf_view plugin in production.ini
+- name: Enable pdf_view extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -571,7 +571,7 @@
     editable: yes
     state: present
 
-- name: Check if pages plugin is already enabled in production.ini
+- name: Check if pages extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*pages.*$'
@@ -580,7 +580,7 @@
   changed_when: false
   register: pages_plugin_enabled
 
-- name: Enable pages plugin in production.ini
+- name: Enable pages extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -601,7 +601,7 @@
     editable: yes
     state: present
 
-- name: Check if officedocs_view plugin is already enabled in production.ini
+- name: Check if officedocs_view extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*officedocs_view.*$'
@@ -610,7 +610,7 @@
   changed_when: false
   register: officedocs_plugin_enabled
 
-- name: Enable officedocs_view plugin in production.ini
+- name: Enable officedocs_view extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -685,7 +685,7 @@
       ckan.onedataportal.sysadmin_disable_create_dataset = True
   notify: reload apache2
 
-- name: Check if onedataportal plugin is already enabled in production.ini
+- name: Check if onedataportal extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*onedataportal.*$'
@@ -694,7 +694,7 @@
   changed_when: false
   register: onedataportal_plugin_enabled
 
-- name: Enable onedataportal plugin in production.ini
+- name: Enable onedataportal extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -726,7 +726,7 @@
       ckanext.issues.send_email_notifications = {{ ckan_issues_send_email_notifications }}
   notify: reload apache2
 
-- name: Check if issues plugin is already enabled in production.ini
+- name: Check if issues extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*issues.*$'
@@ -735,7 +735,7 @@
   changed_when: false
   register: issues_plugin_enabled
 
-- name: Enable issues plugin in production.ini
+- name: Enable issues extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -786,7 +786,7 @@
       ckan.privatedatasets.parser = ckanext.privatedatasets.parsers.fiware:FiWareNotificationParser
   notify: reload apache2
 
-- name: Check if privatedatasets plugin is already enabled in production.ini
+- name: Check if privatedatasets extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*privatedatasets.*$'
@@ -795,7 +795,7 @@
   changed_when: false
   register: privatedatasets_plugin_enabled
 
-- name: Enable privatedatasets plugin in production.ini
+- name: Enable privatedatasets extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -836,7 +836,7 @@
       scheming.dataset_schemas = ckanext.onedataportal:ckan_dataset.json
   notify: reload apache2
 
-- name: Check if scheming plugin is already enabled in production.ini
+- name: Check if scheming extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*scheming_datasets.*$'
@@ -845,7 +845,7 @@
   changed_when: false
   register: scheming_plugin_enabled
 
-- name: Enable scheming plugin in production.ini
+- name: Enable scheming extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -866,7 +866,7 @@
     editable: yes
     state: present
 
-- name: Check if repeating plugin is already enabled in production.ini
+- name: Check if repeating extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*repeating.*$'
@@ -875,7 +875,7 @@
   changed_when: false
   register: repeating_plugin_enabled
 
-- name: Enable repeating plugin in production.ini
+- name: Enable repeating extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -896,7 +896,7 @@
     editable: yes
     state: present
 
-- name: Check if composite plugin is already enabled in production.ini
+- name: Check if composite extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*composite.*$'
@@ -905,7 +905,7 @@
   changed_when: false
   register: composite_plugin_enabled
 
-- name: Enable composite plugin in production.ini
+- name: Enable composite extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -934,7 +934,7 @@
     virtualenv: "{{ ckan_virtualenv }}"
     state: present
 
-- name: Check if validation plugin is already enabled in production.ini
+- name: Check if validation extension is already enabled in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^ckan\.plugins.*validation.*$'
@@ -943,7 +943,7 @@
   changed_when: false
   register: validation_plugin_enabled
 
-- name: Enable validation plugin in production.ini
+- name: Enable validation extension in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
     regexp: '^(ckan\.plugins(.*)$)'
@@ -970,6 +970,66 @@
     dest: "{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized"
     mode: 0644
   when: ckanext_validation_tables_initialized.stat.exists == false
+  notify: reload apache2
+
+# Setup ckanext-mapviews extension
+# https://github.com/ckan/ckanext-mapviews
+- name: "Install ckanext-mapviews extension from `{{ ckanext_mapviews_src_url }}`"
+  become: true
+  become_user: "{{ ckan_user.name }}"
+  pip:
+    name: "{{ ckanext_mapviews_src_url }}"
+    virtualenv: "{{ ckan_virtualenv }}"
+    editable: yes
+    state: present
+
+- name: Check if mapviews extension is already enabled in production.ini
+  lineinfile:
+    dest: "{{ ckan_conf_dir }}/production.ini"
+    regexp: '^ckan\.plugins.*navigablemap choroplethmap.*$'
+    state: absent
+  check_mode: yes
+  changed_when: false
+  register: mapviews_plugin_enabled
+
+- name: Enable mapviews extension in production.ini
+  lineinfile:
+    dest: "{{ ckan_conf_dir }}/production.ini"
+    regexp: '^(ckan\.plugins(.*)$)'
+    backrefs: yes
+    line: '\1 navigablemap choroplethmap'
+    state: present
+  when: not mapviews_plugin_enabled.found
+  notify: reload apache2
+
+# Setup ckanext-basiccharts extension
+# https://github.com/localidata/ckanext-basiccharts
+- name: "Install ckanext-basiccharts extension from `{{ ckanext_basiccharts_src_url }}`"
+  become: true
+  become_user: "{{ ckan_user.name }}"
+  pip:
+    name: "{{ ckanext_basiccharts_src_url }}"
+    virtualenv: "{{ ckan_virtualenv }}"
+    editable: yes
+    state: present
+
+- name: Check if basiccharts extension is already enabled in production.ini
+  lineinfile:
+    dest: "{{ ckan_conf_dir }}/production.ini"
+    regexp: '^ckan\.plugins.*linechart barchart piechart basicgrid.*$'
+    state: absent
+  check_mode: yes
+  changed_when: false
+  register: basiccharts_plugin_enabled
+
+- name: Enable basiccharts extension in production.ini
+  lineinfile:
+    dest: "{{ ckan_conf_dir }}/production.ini"
+    regexp: '^(ckan\.plugins(.*)$)'
+    backrefs: yes
+    line: '\1 linechart barchart piechart basicgrid'
+    state: present
+  when: not basiccharts_plugin_enabled.found
   notify: reload apache2
 
 - name: "Set permissions on CKAN base js i18n directory `{{ ckan_virtualenv }}/src/ckan/ckan/public/base/i18n` to allow write access by Apache process"

@@ -38,21 +38,21 @@
     path: "{{ install_dir_oskari }}/oskari-server/oskari-application-dps"
     state: directory
 
-- name: "Run `sudo npm install` in `{{ install_dir_oskari }}/oskari-server/oskari-frontend`"
-  shell: |
-    cd {{ install_dir_oskari }}/oskari-server/oskari-frontend
-    sudo npm install
-    exit
-
-- name: "Run `sudo npm install` in `{{ install_dir_oskari }}/oskari-server/oskari-frontend-contrib`"
-  shell: |
-    cd {{ install_dir_oskari }}/oskari-server/oskari-frontend-contrib
-    sudo npm install
-    exit
-
 - name: "Run `sudo npm install` in `{{ install_dir_oskari }}/oskari-server/oskari-application-dps`"
   shell: |
     cd {{ install_dir_oskari }}/oskari-server/oskari-application-dps
+    sudo npm install
+    exit
+
+- name: "Run `sudo npm install` in `{{ install_dir_oskari }}/oskari-server/oskari-application-dps/node_modules/oskari-frontend`"
+  shell: |
+    cd {{ install_dir_oskari }}/oskari-server/oskari-application-dps/node_modules/oskari-frontend
+    sudo npm install
+    exit
+
+- name: "Run `sudo npm install` in `{{ install_dir_oskari }}/oskari-server/oskari-application-dps/node_modules/oskari-frontend-contrib`"
+  shell: |
+    cd {{ install_dir_oskari }}/oskari-server/oskari-application-dps/node_modules/oskari-frontend-contrib
     sudo npm install
     exit
 

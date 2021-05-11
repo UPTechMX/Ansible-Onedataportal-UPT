@@ -18,9 +18,6 @@
    - maven
    - nodejs
 
-- name: Install Angular for UPT-GUI
-  shell: sudo npm install -g @angular/cli
-
 - name: Set JAVA_HOME environment variable
   lineinfile:
     path: /etc/environment
