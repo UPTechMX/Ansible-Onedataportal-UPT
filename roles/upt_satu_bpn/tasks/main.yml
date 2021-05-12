@@ -4,48 +4,64 @@
   args:
     creates: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties.orig"
 
-- name: Copy `oskari-ext.properties` settings file for Oskari from template
-  template:
-    src: ../templates/oskari-ext.properties.j2
+- name: "Enable custom user service `org.oskari.example.util.DatabaseUserServiceCKAN` bundle in `oskari.user.service` in Oskari settings"
+  lineinfile:
     dest: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
-    owner: root
-    group: root
-    mode: 0644
+    regexp: 'oskari\.user\.service(.*)$'
+    line: "oskari.user.service=org.oskari.example.util.DatabaseUserServiceCKAN"
+    state: present
+
+- name: "Add extra settings for the UrbanPerformance and Distance evaluation modules for UPT"
+  blockinfile:
+    path: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
+    block: |
+
+      ##################################
+      # UPT Modules Settings
+      ##################################
+      up.db.URL=jdbc:postgresql://localhost:5432/oskaridb
+      up.db.password=oskari
+      up.db.user=oskari
+
+      upws.db.host={{ upt_modules.up_backend_host }}
+      upws.db.port={{ upt_modules.up_backend_port }}
+      stws.db.host={{ upt_modules.distance_backend_host }}
+      stws.db.port={{ upt_modules.distance_backend_port }}
 
 - name: Cloning UPT-GUI repository
   git: 
     #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-UrbanPerformance.git
     repo: https://github.com/amilcar-capsus/UPT-GUI.git
-    dest: "{{ oskari_dir }}/UPT-GUI"
+    dest: "{{ install_dir_oskari }}/oskari-server/UPT-GUI"
     clone: yes
 
 - name: Cloning UPT-Server-Extension repository
   git: 
     #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-Distance-Module.git
     repo: https://github.com/amilcar-capsus/UPT-Server-Extension.git
-    dest: "{{ oskari_dir }}/UPT-Server-Extension"
+    dest: "{{ install_dir_oskari }}/oskari-server/UPT-Server-Extension"
     clone: yes
 
 - name: Run npm install for UPT-GUI dependencies
   shell: |
-    cd {{ oskari_dir }}/UPT-GUI
+    cd {{ install_dir_oskari }}/oskari-server/UPT-GUI
     git checkout satu-integration
     npm install
     exit
 
 - name: Building the UPT-GUI for SatuDataportal
   shell: |
-    cd {{ oskari_dir }}/UPT-GUI
+    cd {{ install_dir_oskari }}/oskari-server/UPT-GUI
     ng build --prod --output-hashing none
     exit
 
 - name: Copy build artifacts to oskari-frontend
   shell: |
-    cp -r {{ oskari_dir }}/UPT-GUI/dist/PLID {{ oskari_dir }}/oskari-application-bpn/dist/wbidp/geoportal
+    cp -r {{ install_dir_oskari }}/oskari-server/UPT-GUI/dist/PLID {{ install_dir_oskari }}/oskari-server/oskari-application-bpn/dist/wbidp/geoportal
 
 - name: Checkout UPT-Server-Extension for SatuDataportal
   shell: |
-    cd {{ oskari_dir }}/UPT-Server-Extension
+    cd {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension
     git checkout satu-integration
     exit
 
@@ -55,13 +71,13 @@
   environment:
     PGPASSWORD: '{{ oskari_db_pw }}'
   shell: |
-    psql -h localhost -U oskari -f {{ oskari_dir }}/UPT-Server-Extension/app-resources/src/main/resources/flyway/example/run-upt-scripts.sql -d oskaridb
+    psql -h localhost -U oskari -f {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension/app-resources/src/main/resources/flyway/example/run-upt-scripts.sql -d oskaridb
 
 - name: Build oskari-map.war file
   shell: |
-    cd {{ oskari_dir }}/UPT-Server-Extension
+    cd {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension
     mvn clean install
 
 - name: Copy oskari-map.war to webapps of oskari-server directory
   shell: |
-    cp {{ oskari_dir }}/UPT-Server-Extension/webapp-map/target/oskari-map.war {{ oskari_dir }}/webapps
+    cp {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension/webapp-map/target/oskari-map.war {{ install_dir_oskari }}/oskari-server/webapps

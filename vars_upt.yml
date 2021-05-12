@@ -1,7 +1,11 @@
 ---
 ###############
-#  System vars
+#  UPT vars
 ###############
-user: root
-oskari_dir: /opt/oskari/oskari-server
 oskari_db_pw: oskari
+upt_modules: {
+  up_backend_host: "127.0.0.1",
+  up_backend_port: "91",
+  distance_backend_host: "127.0.0.1",
+  distance_backend_port: "90"
+}
