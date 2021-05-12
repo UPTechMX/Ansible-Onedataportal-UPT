@@ -14,6 +14,8 @@
 - name: "Add extra settings for the UrbanPerformance and Distance evaluation modules for UPT"
   blockinfile:
     path: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
+    insertafter: EOF
+    marker: "# {mark} UPT Ansible Managed Block #"
     block: |
 
       ##################################
