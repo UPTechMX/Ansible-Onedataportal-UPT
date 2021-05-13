@@ -1,5 +1,5 @@
 # ansible-onedataportal
-[Ansible](https://docs.ansible.com) playbooks for automatic deployment of the One Data Portal (Portal Satu Data) comprising of [CKAN](https://ckan.org) version 2.8.3 and [Oskari](https://www.oskari.org/) version 1.55.2.
+[Ansible](https://docs.ansible.com) playbooks for automatic deployment of the One Data Portal (Portal Satu Data) comprising of [CKAN](https://ckan.org) version 2.8.3 and [Oskari](https://www.oskari.org/) version 1.55.2. This also includes integration with the Urban Planning Tools (UPT) for Oskari, UrbanPerformance and SuitAbility/UrbanHotspots.
 
 ## Requirements
 ### Target server
@@ -75,6 +75,13 @@ SSH to the target server and perform the following steps:
     ```
     oskari_domain: set this to the IP address or domain name of the server where Oskari will be accessed (default is http://192.168.1.200:8080)
     ```
+  * ```nano vars_upt.yml```
+    ```
+    up_backend_host: set this to the IP address or domain name of the server from which the UrbanPerformance module will be accessed
+    up_backend_port: set this to port of the server from which the UrbanPerformance module will be accessed (default is 91)
+    distance_backend_host: set this to the IP address or domain name of the server from which the distance evaluation module will be accessed
+    distance_backend_port: set this to the port of the server from which the distance evaluation module will be accessed
+    ```
 * Run the playbooks
     * Recommended method: run the install all playbook to install everything in order
       * This will run the playbooks above in correct order from 0 to 6
@@ -125,6 +132,23 @@ SSH to the target server and perform the following steps:
   ```
   sudo reboot
   ```
+* Install the oskari application and server extension for a municipality
+  ```
+  cd /opt/ansible-onedataportal
+  # become root user
+  sudo su
+  # For Balikpapan
+  ansible-playbook -K -i inventory install_oskari_balikpapan.yml
+  # or for Denpasar
+  ansible-playbook -K -i inventory install_oskari_denpasar.yml
+  ```
+* Install the UPT GUI and server extension according to the municipality
+  ```
+  # For Balikpapan
+  ansible-playbook -K -i inventory install_upt_oskari_satu_integration_bpn.yml
+  # or for Denpasar
+  ansible-playbook -K -i inventory install_upt_oskari_satu_integration_dps.yml
+  ```
 * Access the One Data Portal at the server's IP address or domain name on a web browser:
   * By default the CKAN Data Portal is accessible at http://the.server.ip.address (reverse proxied by NGINX from http://the.server.ip.address:8090)
   * CKAN DataPusher service at http://the.server.ip.address:8800/
@@ -133,3 +157,8 @@ SSH to the target server and perform the following steps:
   * Oskari Geoportal at http://the.server.ip.address:8080
   * GeoServer admin at http://the.server.ip.address:8082/geoserver/web
 * Done!
+
+## Additional links
+* [Ansible playbook](https://github.com/UPTechMX/UPT-Modules-Ansible) for the installation of the UrbanPerformance and distance evaluation modules for the UPT (**IMPORTANT** for `vars_upt.yml`)
+* [UPT Oskari server extension](https://github.com/UPTechMX/UPT-Server-Extension) which is installed through the ansible playbooks in this repo
+* [UPT GUI](https://github.com/UPTechMX/UPT-GUI) which is installed through the ansible playbooks in this repo
