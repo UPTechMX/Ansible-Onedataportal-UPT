@@ -68,7 +68,7 @@
 - name: Run npm install for UPT-GUI dependencies
   shell: |
     cd {{ install_dir_oskari }}/oskari-server/UPT-GUI
-    git checkout satu-integration
+    git checkout satu-integration-dps
     npm install
     exit
 
@@ -85,7 +85,7 @@
 - name: Checkout UPT-Server-Extension for SatuDataportal
   shell: |
     cd {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension
-    git checkout satu-integration
+    git checkout satu-integration-dps
     exit
 
 - name: Build oskari-map.war file
