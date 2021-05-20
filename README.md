@@ -1,4 +1,4 @@
-# ansible-onedataportal
+# Ansible-Onedataportal-UPT
 [Ansible](https://docs.ansible.com) playbooks for automatic deployment of the One Data Portal (Portal Satu Data) comprising of [CKAN](https://ckan.org) version 2.8.3 and [Oskari](https://www.oskari.org/) version 1.55.2. This also includes integration with the Urban Planning Tools (UPT) for Oskari, UrbanPerformance and SuitAbility/UrbanHotspots.
 
 ## Requirements
