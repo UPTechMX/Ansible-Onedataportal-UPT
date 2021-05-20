@@ -54,14 +54,14 @@
 - name: Cloning UPT-GUI repository
   git: 
     #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-UrbanPerformance.git
-    repo: https://github.com/amilcar-capsus/UPT-GUI.git
+    repo: https://github.com/UPTechMX/UPT-GUI.git
     dest: "{{ install_dir_oskari }}/oskari-server/UPT-GUI"
     clone: yes
 
 - name: Cloning UPT-Server-Extension repository
   git: 
     #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-Distance-Module.git
-    repo: https://github.com/amilcar-capsus/UPT-Server-Extension.git
+    repo: https://github.com/UPTechMX/UPT-Server-Extension.git
     dest: "{{ install_dir_oskari }}/oskari-server/UPT-Server-Extension"
     clone: yes
 
