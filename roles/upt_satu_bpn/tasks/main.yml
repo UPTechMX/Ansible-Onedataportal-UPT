@@ -68,7 +68,7 @@
 - name: Run npm install for UPT-GUI dependencies
   shell: |
     cd {{ install_dir_oskari }}/oskari-server/UPT-GUI
-    git checkout satu-integration-bpn
+    git checkout satu-integration
     npm install
     exit
 
