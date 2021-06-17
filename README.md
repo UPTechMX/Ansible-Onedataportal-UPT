@@ -70,6 +70,7 @@ SSH to the target server and perform the following steps:
     (Optional, recommended) ckan_admin.password: set the default password for the CKAN admin user
     (Optional) ckan_max_resource_size: change the default resource file size upload limit (default is 100 MB)
     (Optional) ckan_max_image_size: change the default image file size upload limit (default is 10 MB)
+    (Optional) ckan_locale_default: change the default locale for CKAN
     ```
   * ```nano vars_oskari.yml```
     ```
