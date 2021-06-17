@@ -51,7 +51,7 @@ SSH to the target server and perform the following steps:
   cd /opt
   # become root user
   sudo su
-  git clone https://github.com/geoenvo/ansible-onedataportal.git
+  git clone https://github.com/UPTechMX/Ansible-Onedataportal-UPT.git
   cd ansible-onedataportal
   ```
 * Configure the mandatory playbook variables
