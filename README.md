@@ -52,7 +52,7 @@ SSH to the target server and perform the following steps:
   # become root user
   sudo su
   git clone https://github.com/UPTechMX/Ansible-Onedataportal-UPT.git
-  cd ansible-onedataportal
+  cd Ansible-Onedataportal-UPT
   ```
 * Configure the mandatory playbook variables
   * ```nano vars_provision_server.yml```
