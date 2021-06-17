@@ -80,7 +80,7 @@ SSH to the target server and perform the following steps:
     up_backend_host: set this to the IP address or domain name of the server from which the UrbanPerformance module will be accessed
     up_backend_port: set this to port of the server from which the UrbanPerformance module will be accessed (default is 91)
     distance_backend_host: set this to the IP address or domain name of the server from which the distance evaluation module will be accessed
-    distance_backend_port: set this to the port of the server from which the distance evaluation module will be accessed
+    distance_backend_port: set this to the port of the server from which the distance evaluation module will be accessed (default is 90)
     ```
 * Run the playbooks
     * Recommended method: run the install all playbook to install everything in order
