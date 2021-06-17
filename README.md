@@ -3,7 +3,7 @@
 
 ## Requirements
 ### Target server
-* A fresh installed [Ubuntu Server 18.04](https://ubuntu.com/download/server) (minimum 4 GB RAM and 20 GB of free space) with a user that is part of the `sudo` group (IMPORTANT: using the root user is not recommended since by default the server provisioning playbook `0_provision_server.yml` will disable root user login for better security). Below is an example of a user called `username` that is created and added to the `sudo` group. 
+* A fresh installed [Ubuntu Server 18.04](https://ubuntu.com/download/server) (minimum 8 GB RAM and 20 GB of free space) with a user that is part of the `sudo` group (IMPORTANT: using the root user is not recommended since by default the server provisioning playbook `0_provision_server.yml` will disable root user login for better security). Below is an example of a user called `username` that is created and added to the `sudo` group. 
   ```
   adduser username
   usermod -aG sudo username
