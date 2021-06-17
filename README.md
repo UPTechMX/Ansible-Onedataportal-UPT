@@ -96,7 +96,7 @@ SSH to the target server and perform the following steps:
     * Or one by one
       * Must be run in the order of the filename
         ```
-        cd /opt/ansible-onedataportal
+        cd /opt/Ansible-Onedataportal-UPT
         # become root user
         sudo su
         ansible-playbook -K -i inventory 0_provision_server.yml
@@ -112,7 +112,7 @@ SSH to the target server and perform the following steps:
       * Refer to https://oskari.org/documentation/backend/setup-development
       * PostgreSQL and PostGIS must be installed first if they haven't been installed above
         ```
-        cd /opt/ansible-onedataportal
+        cd /opt/Ansible-Onedataportal-UPT
         # become root user
         sudo su
         ansible-playbook -K -i inventory 1_install_postgresql.yml
@@ -135,7 +135,7 @@ SSH to the target server and perform the following steps:
   ```
 * Install the oskari application and server extension for a municipality
   ```
-  cd /opt/ansible-onedataportal
+  cd /opt/Ansible-Onedataportal-UPT
   # become root user
   sudo su
   # For Balikpapan
