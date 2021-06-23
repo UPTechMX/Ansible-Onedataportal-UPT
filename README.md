@@ -157,6 +157,9 @@ SSH to the target server and perform the following steps:
   * Solr admin at http://the.server.ip.address:8983/solr/
   * Oskari Geoportal at http://the.server.ip.address:8080
   * GeoServer admin at http://the.server.ip.address:8082/geoserver/web
+
+* Read [the wiki](https://github.com/UPTechMX/Ansible-Onedataportal-UPT/wiki) for reverse proxy configurations (for use with domains) and **VERY IMPORTANT** instructions for CKAN in order to use UrbanHotspots/UrbanPerformance
+
 * Done!
 
 ## Additional links
