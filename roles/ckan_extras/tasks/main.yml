@@ -109,7 +109,9 @@
   become: true
   become_user: "{{ ckan_user.name }}"
   pip:
-    requirements: "{{ ckan_virtualenv }}/src/ckanext-spatial/pip-requirements.txt"
+    # 202109 update ckanext-spatial from v0.2 to v1.0.0
+    #requirements: "{{ ckan_virtualenv }}/src/ckanext-spatial/pip-requirements.txt"
+    requirements: "{{ ckan_virtualenv }}/src/ckanext-spatial/pip-requirements-py2.txt"
     virtualenv: "{{ ckan_virtualenv }}"
     state: present
 
