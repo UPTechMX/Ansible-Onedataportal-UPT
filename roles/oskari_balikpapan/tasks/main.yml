@@ -15,9 +15,9 @@
     clone: yes
     update: yes
 
-- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/geoenvo/oskari-application-bpn/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application-bpn`"
-  git:
-    repo: https://github.com/geoenvo/oskari-application-bpn.git
+#- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/geoenvo/oskari-application-bpn/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application-bpn`"
+- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/UPTechMX/oskari-application-bpn/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application-bpn`"  git:
+    repo: https://github.com/UPTechMX/oskari-application-bpn.git
     dest: "{{ install_dir_oskari }}/oskari-server/oskari-application-bpn"
     version: "wb-idp"
     clone: yes
