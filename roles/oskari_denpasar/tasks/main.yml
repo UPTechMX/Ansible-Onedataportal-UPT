@@ -18,7 +18,7 @@
 #- name: "Clone Oskari Denpasar frontend application repo from `https://github.com/geoenvo/oskari-application-dps/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application-dps`"
 - name: "Clone Oskari Denpasar frontend application repo from `https://github.com/UPTechMx/oskari-application-dps/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application-dps`"
   git:
-    repo: https://github.com/geoenvo/oskari-application-dps.git
+    repo: https://github.com/UPTechMX/oskari-application-dps.git
     dest: "{{ install_dir_oskari }}/oskari-server/oskari-application-dps"
     version: "wb-idp"
     clone: yes
