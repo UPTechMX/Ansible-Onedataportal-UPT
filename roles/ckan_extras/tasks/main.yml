@@ -919,60 +919,60 @@
 
 # Setup ckanext-validation extension
 # https://github.com/frictionlessdata/ckanext-validation.git
-- name: "Install ckanext-validation extension from `{{ ckanext_validation_src_url }}`"
-  become: true
-  become_user: "{{ ckan_user.name }}"
-  pip:
-    name: "{{ ckanext_validation_src_url }}"
-    virtualenv: "{{ ckan_virtualenv }}"
-    editable: yes
-    state: present
+#- name: "Install ckanext-validation extension from `{{ ckanext_validation_src_url }}`"
+#  become: true
+#  become_user: "{{ ckan_user.name }}"
+#  pip:
+#    name: "{{ ckanext_validation_src_url }}"
+#    virtualenv: "{{ ckan_virtualenv }}"
+#    editable: yes
+#    state: present
 
-- name: "Install ckanext-validation package requirements from `{{ ckan_virtualenv }}/src/ckanext-validation/requirements.txt`"
-  become: true
-  become_user: "{{ ckan_user.name }}"
-  pip:
-    requirements: "{{ ckan_virtualenv }}/src/ckanext-validation/requirements.txt"
-    virtualenv: "{{ ckan_virtualenv }}"
-    state: present
+#- name: "Install ckanext-validation package requirements from `{{ ckan_virtualenv }}/src/ckanext-validation/requirements.txt`"
+#  become: true
+#  become_user: "{{ ckan_user.name }}"
+#  pip:
+#    requirements: "{{ ckan_virtualenv }}/src/ckanext-validation/requirements.txt"
+#    virtualenv: "{{ ckan_virtualenv }}"
+#    state: present
 
-- name: Check if validation extension is already enabled in production.ini
-  lineinfile:
-    dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^ckan\.plugins.*validation.*$'
-    state: absent
-  check_mode: yes
-  changed_when: false
-  register: validation_plugin_enabled
+#- name: Check if validation extension is already enabled in production.ini
+#  lineinfile:
+#    dest: "{{ ckan_conf_dir }}/production.ini"
+#    regexp: '^ckan\.plugins.*validation.*$'
+#    state: absent
+#  check_mode: yes
+#  changed_when: false
+#  register: validation_plugin_enabled
 
-- name: Enable validation extension in production.ini
-  lineinfile:
-    dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^(ckan\.plugins(.*)$)'
-    backrefs: yes
-    line: '\1 validation'
-    state: present
-  when: not validation_plugin_enabled.found
-  notify: reload apache2
+#- name: Enable validation extension in production.ini
+#  lineinfile:
+#    dest: "{{ ckan_conf_dir }}/production.ini"
+#    regexp: '^(ckan\.plugins(.*)$)'
+#    backrefs: yes
+#    line: '\1 validation'
+#    state: present
+#  when: not validation_plugin_enabled.found
+#  notify: reload apache2
 
-- name: "Check if ckanext-validation database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized` exists"
-  stat:
-    path: "{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized"
-  register: ckanext_validation_tables_initialized
+#- name: "Check if ckanext-validation database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized` exists"
+#  stat:
+#    path: "{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized"
+#  register: ckanext_validation_tables_initialized
 
-- name: "Initialize ckanext-validation database tables (only if `{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized` file does not exist)"
-  shell: |
-    {{ ckan_virtualenv }}/bin/paster --plugin=ckanext-validation validation init-db -c {{ ckan_conf_dir }}/production.ini
-    exit
-  when: ckanext_validation_tables_initialized.stat.exists == false
+#- name: "Initialize ckanext-validation database tables (only if `{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized` file does not exist)"
+#  shell: |
+#    {{ ckan_virtualenv }}/bin/paster --plugin=ckanext-validation validation init-db -c {{ ckan_conf_dir }}/production.ini
+#    exit
+#  when: ckanext_validation_tables_initialized.stat.exists == false
 
-- name: "Create ckanext-validation database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized`"
-  copy:
-    content: "ckanext-validation database tables initialized\n"
-    dest: "{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized"
-    mode: 0644
-  when: ckanext_validation_tables_initialized.stat.exists == false
-  notify: reload apache2
+#- name: "Create ckanext-validation database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized`"
+#  copy:
+#    content: "ckanext-validation database tables initialized\n"
+#    dest: "{{ ckan_conf_dir }}/.ckanext_validation_tables_initialized"
+#    mode: 0644
+#  when: ckanext_validation_tables_initialized.stat.exists == false
+#  notify: reload apache2
 
 # Setup ckanext-mapviews extension
 # https://github.com/ckan/ckanext-mapviews
