@@ -17,23 +17,25 @@ oskari_client_version: 1.2.1
 oskari_jetty_bundle_archive_url: "https://github.com/geoenvo/ansible-onedataportal/releases/download/mirror_oskari_{{ oskari_version }}/{{ oskari_jetty_bundle_archive }}"
 #oskari_locales: "en_US,fi_FI,sv_SE,es_ES,in_ID"
 oskari_locales: "en_US,in_ID"
-oskari_development_node_version: 12
+oskari_development_node_version: 14
 geoserver_version: 2.13.2
 geoserver_war_archive: "geoserver-{{ geoserver_version }}-war.zip"
 #geoserver_war_archive_url: "http://sourceforge.net/projects/geoserver/files/GeoServer/{{ geoserver_version }}/{{ geoserver_war_archive }}"
 geoserver_war_archive_url: "https://github.com/geoenvo/ansible-onedataportal/releases/download/mirror_geoserver_war/{{ geoserver_war_archive }}"
 geoserver_port: 8082
-oskari_db: {
-  username: "oskari",
-  password: "oskari",
-  role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
-  name: "oskaridb",
-  host: "localhost"
-}
-geoserver_db: {
-  username: "geoserver",
-  password: "geoserver",
-  role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
-  name: "geoserver",
-  host: "localhost"
-}
+oskari_db:
+  {
+    username: "oskari",
+    password: "oskari",
+    role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
+    name: "oskaridb",
+    host: "localhost",
+  }
+geoserver_db:
+  {
+    username: "geoserver",
+    password: "geoserver",
+    role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
+    name: "geoserver",
+    host: "localhost",
+  }
