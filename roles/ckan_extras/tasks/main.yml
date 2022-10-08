@@ -21,14 +21,14 @@
 - name: Enable DataStore database writing in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^#ckan.datastore.write_url'
+    regexp: "^#ckan.datastore.write_url"
     line: "ckan.datastore.write_url = postgresql://{{ ckan_db.username }}:{{ ckan_db.password }}@{{ datastore_db.host }}/{{ datastore_db.name }}"
     state: present
 
 - name: Enable DataStore database reading in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^#ckan.datastore.read_url'
+    regexp: "^#ckan.datastore.read_url"
     line: "ckan.datastore.read_url = postgresql://{{ datastore_db.username }}:{{ datastore_db.password }}@{{ datastore_db.host }}/{{ datastore_db.name }}"
     state: present
 
@@ -81,10 +81,10 @@
     name: "{{ item }}"
     state: present
   with_items:
-   - python-dev
-   - libxslt1-dev
-   - libxml2-dev
-   - libgeos-c1v5
+    - python-dev
+    - libxslt1-dev
+    - libxml2-dev
+    - libgeos-c1v5
 
 - name: Enable PostGIS extension on CKAN database
   become: true
@@ -136,92 +136,92 @@
 
 # Setup ckanext-harvest extension
 # https://github.com/ckan/ckanext-harvest
-- name: Update apt package cache
-  apt:
-    update_cache: yes
+# - name: Update apt package cache
+#   apt:
+#     update_cache: yes
 
-- name: Install ckanext-harvest prerequisite packages
-  package:
-    name: "{{ item }}"
-    state: present
-  with_items:
-   - redis-server
+# - name: Install ckanext-harvest prerequisite packages
+#   package:
+#     name: "{{ item }}"
+#     state: present
+#   with_items:
+#    - redis-server
 
-- name: "Install ckanext-harvest extension version {{ ckanext_harvest_version }} from `{{ ckanext_harvest_src_url }}`"
-  become: true
-  become_user: "{{ ckan_user.name }}"
-  pip:
-    name: "{{ ckanext_harvest_src_url }}"
-    virtualenv: "{{ ckan_virtualenv }}"
-    editable: yes
-    state: present
+# - name: "Install ckanext-harvest extension version {{ ckanext_harvest_version }} from `{{ ckanext_harvest_src_url }}`"
+#   become: true
+#   become_user: "{{ ckan_user.name }}"
+#   pip:
+#     name: "{{ ckanext_harvest_src_url }}"
+#     virtualenv: "{{ ckan_virtualenv }}"
+#     editable: yes
+#     state: present
 
-- name: "[FIX] Install `urllib3` package dependency for ckanext-harvest v1.3.1"
-  pip:
-    name: urllib3
-    virtualenv: "{{ ckan_virtualenv }}"
-  when: ckanext_harvest_version == "v1.3.1"
+# - name: "[FIX] Install `urllib3` package dependency for ckanext-harvest v1.3.1"
+#   pip:
+#     name: urllib3
+#     virtualenv: "{{ ckan_virtualenv }}"
+#   when: ckanext_harvest_version == "v1.3.1"
 
-- name: "Install ckanext-harvest package requirements from `{{ ckan_virtualenv }}/src/ckanext-harvest/pip-requirements.txt`"
-  become: true
-  become_user: "{{ ckan_user.name }}"
-  pip:
-    requirements: "{{ ckan_virtualenv }}/src/ckanext-harvest/pip-requirements.txt"
-    virtualenv: "{{ ckan_virtualenv }}"
-    state: present
+# - name: "Install ckanext-harvest package requirements from `{{ ckan_virtualenv }}/src/ckanext-harvest/pip-requirements.txt`"
+#   become: true
+#   become_user: "{{ ckan_user.name }}"
+#   pip:
+#     requirements: "{{ ckan_virtualenv }}/src/ckanext-harvest/pip-requirements.txt"
+#     virtualenv: "{{ ckan_virtualenv }}"
+#     state: present
 
-- name: Enable redis as harvest mq in production.ini
-  lineinfile:
-    dest: "{{ ckan_conf_dir }}/production.ini"
-    insertafter: '^\[app:main\]$'
-    line: ckan.harvest.mq.type = redis
-    state: present
+# - name: Enable redis as harvest mq in production.ini
+#   lineinfile:
+#     dest: "{{ ckan_conf_dir }}/production.ini"
+#     insertafter: '^\[app:main\]$'
+#     line: ckan.harvest.mq.type = redis
+#     state: present
 
-- name: Check if harvest ckan_harvester csw_harvester waf_harvester doc_harvester extensions are already enabled in production.ini
-  lineinfile:
-    dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^ckan\.plugins.*harvest ckan_harvester csw_harvester waf_harvester doc_harvester.*$'
-    state: absent
-  check_mode: yes
-  changed_when: false
-  register: harvest_plugins_enabled
+# - name: Check if harvest ckan_harvester csw_harvester waf_harvester doc_harvester extensions are already enabled in production.ini
+#   lineinfile:
+#     dest: "{{ ckan_conf_dir }}/production.ini"
+#     regexp: '^ckan\.plugins.*harvest ckan_harvester csw_harvester waf_harvester doc_harvester.*$'
+#     state: absent
+#   check_mode: yes
+#   changed_when: false
+#   register: harvest_plugins_enabled
 
-- name: Enable harvest ckan_harvester csw_harvester waf_harvester doc_harvester extensions in production.ini
-  lineinfile:
-    dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^(ckan\.plugins(.*)$)'
-    backrefs: yes
-    line: '\1 harvest ckan_harvester csw_harvester waf_harvester doc_harvester'
-    state: present
-  when: not harvest_plugins_enabled.found
-  notify: reload apache2
+# - name: Enable harvest ckan_harvester csw_harvester waf_harvester doc_harvester extensions in production.ini
+#   lineinfile:
+#     dest: "{{ ckan_conf_dir }}/production.ini"
+#     regexp: '^(ckan\.plugins(.*)$)'
+#     backrefs: yes
+#     line: '\1 harvest ckan_harvester csw_harvester waf_harvester doc_harvester'
+#     state: present
+#   when: not harvest_plugins_enabled.found
+#   notify: reload apache2
 
-- name: "Check if ckanext-harvest database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized` exists"
-  stat:
-    path: "{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized"
-  register: ckanext_harvest_tables_initialized
+# - name: "Check if ckanext-harvest database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized` exists"
+#   stat:
+#     path: "{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized"
+#   register: ckanext_harvest_tables_initialized
 
-- name: "[TEMPORARY] Set permissions on CKAN base js i18n directory `{{ ckan_virtualenv }}/src/ckan/ckan/public/base/i18n` to allow write access by CKAN process"
-  file:
-    path: "{{ ckan_virtualenv }}/src/ckan/ckan/public/base/i18n"
-    state: directory
-    recurse: yes
-    owner: "{{ ckan_user.name }}"
-    mode: 0755
+# - name: "[TEMPORARY] Set permissions on CKAN base js i18n directory `{{ ckan_virtualenv }}/src/ckan/ckan/public/base/i18n` to allow write access by CKAN process"
+#   file:
+#     path: "{{ ckan_virtualenv }}/src/ckan/ckan/public/base/i18n"
+#     state: directory
+#     recurse: yes
+#     owner: "{{ ckan_user.name }}"
+#     mode: 0755
 
-- name: "Initialize ckanext-harvest database tables (only if `{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized` file does not exist)"
-  shell: |
-    {{ ckan_virtualenv }}/bin/paster --plugin=ckanext-harvest harvester initdb -c {{ ckan_conf_dir }}/production.ini
-    exit
-  when: ckanext_harvest_tables_initialized.stat.exists == false
+# - name: "Initialize ckanext-harvest database tables (only if `{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized` file does not exist)"
+#   shell: |
+#     {{ ckan_virtualenv }}/bin/paster --plugin=ckanext-harvest harvester initdb -c {{ ckan_conf_dir }}/production.ini
+#     exit
+#   when: ckanext_harvest_tables_initialized.stat.exists == false
 
-- name: "Create ckanext-harvest database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized`"
-  copy:
-    content: "ckanext-harvest database tables initialized\n"
-    dest: "{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized"
-    mode: 0644
-  when: ckanext_harvest_tables_initialized.stat.exists == false
-  notify: reload apache2
+# - name: "Create ckanext-harvest database tables initialized flag file `{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized`"
+#   copy:
+#     content: "ckanext-harvest database tables initialized\n"
+#     dest: "{{ ckan_conf_dir }}/.ckanext_harvest_tables_initialized"
+#     mode: 0644
+#   when: ckanext_harvest_tables_initialized.stat.exists == false
+#   notify: reload apache2
 
 # Setup ckanext-geoview extension (version 0.0.16 as of 202003)
 # https://github.com/ckan/ckanext-geoview
@@ -234,9 +234,9 @@
   blockinfile:
     path: "{{ ckan_conf_dir }}/production.ini"
     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra spatial settings"
-    insertafter: '## Extra spatial settings'
+    insertafter: "## Extra spatial settings"
     block: |
-      
+
       #### Extra spatial settings
       ckan.spatial.srid = 4326
       ckanext.spatial.search_backend = solr
@@ -485,9 +485,9 @@
   blockinfile:
     path: "{{ ckan_conf_dir }}/production.ini"
     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-agsview settings"
-    insertafter: '## Extra ckanext-agsview settings'
+    insertafter: "## Extra ckanext-agsview settings"
     block: |
-      
+
       #### Extra ckanext-agsview settings
       # set default esri basemap http://esri.github.io/esri-leaflet/api-reference/layers/basemap-layer.html
       ckanext.ags_view_default_basemap_url = Gray
@@ -664,9 +664,9 @@
   blockinfile:
     path: "{{ ckan_conf_dir }}/production.ini"
     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-onedataportal settings"
-    insertafter: '## Extra ckanext-onedataportal settings'
+    insertafter: "## Extra ckanext-onedataportal settings"
     block: |
-      
+
       #### Extra ckanext-onedataportal settings
       # setting for the Geoportal link in the nav menu
       ckan.onedataportal.geoportal_url = {{ ckan_onedataportal_geoportal_url }}
@@ -721,9 +721,9 @@
   blockinfile:
     path: "{{ ckan_conf_dir }}/production.ini"
     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-issues settings"
-    insertafter: '## Extra ckanext-issues settings'
+    insertafter: "## Extra ckanext-issues settings"
     block: |
-      
+
       #### Extra ckanext-issues settings
       ckanext.issues.send_email_notifications = {{ ckan_issues_send_email_notifications }}
   notify: reload apache2
@@ -781,9 +781,9 @@
   blockinfile:
     path: "{{ ckan_conf_dir }}/production.ini"
     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-privatedatasets settings"
-    insertafter: '## Extra ckanext-privatedatasets settings'
+    insertafter: "## Extra ckanext-privatedatasets settings"
     block: |
-      
+
       #### Extra ckanext-privatedatasets settings
       ckan.privatedatasets.parser = ckanext.privatedatasets.parsers.fiware:FiWareNotificationParser
   notify: reload apache2
@@ -830,9 +830,9 @@
   blockinfile:
     path: "{{ ckan_conf_dir }}/production.ini"
     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-scheming settings"
-    insertafter: '## Extra ckanext-scheming settings'
+    insertafter: "## Extra ckanext-scheming settings"
     block: |
-      
+
       #### Extra ckanext-scheming settings
       scheming.presets = ckanext.onedataportal:presets.json ckanext.repeating:presets.json ckanext.composite:presets.json ckanext.validation:presets.json
       scheming.dataset_schemas = ckanext.onedataportal:ckan_dataset.json
