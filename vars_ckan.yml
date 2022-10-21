@@ -4,13 +4,14 @@
 #
 
 # CKAN system user
-ckan_user: {
-  name: "ckan",
-  system: "yes",
-  home_path: "/usr/lib/ckan",
-  shell: "/sbin/nologin",
-  description: "CKAN User"
-}
+ckan_user:
+  {
+    name: "ckan",
+    system: "yes",
+    home_path: "/usr/lib/ckan",
+    shell: "/sbin/nologin",
+    description: "CKAN User",
+  }
 # IMPORTANT: must use _ for space character in ckan_site_name!
 ckan_site_name: ckan
 ckan_site_url: "http://192.168.1.200"
@@ -34,7 +35,7 @@ ckan_error_email_from: "no-reply@yourdomain.com"
 ckan_smtp_server: "smtp.yourdomain.com"
 ckan_smtp_starttls: false
 ckan_smtp_user: "ckan-mailer"
-ckan_smtp_password: 'changethispassword'
+ckan_smtp_password: "changethispassword"
 ckan_smtp_mail_from: "no-reply@yourdomain.com"
 ckan_create_admin_user: true
 #ckan_locale_default: en
@@ -42,18 +43,20 @@ ckan_locale_default: id
 #ckan_locale_order: "en id pt_BR ja it cs_CZ ca es fr el sv sr sr@latin no sk fi ru de pl nl bg ko_KR hu sa sl lv"
 ckan_locale_order: "id en pt_BR ja it cs_CZ ca es fr el sv sr sr@latin no sk fi ru de pl nl bg ko_KR hu sa sl lv"
 # IMPORTANT: must use _ for space character in ckan_admin.username!
-ckan_admin: {
-  username: "admin",
-  password: "changethispassword",
-  email: "{{ ckan_email_to }}"
-}
-ckan_db: {
-  username: "ckan_default",
-  password: "ckandefaultdbpassword",
-  role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
-  name: "ckan_default",
-  host: "localhost"
-}
+ckan_admin:
+  {
+    username: "admin",
+    password: "changethispassword",
+    email: "{{ ckan_email_to }}",
+  }
+ckan_db:
+  {
+    username: "ckan_default",
+    password: "ckandefaultdbpassword",
+    role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
+    name: "ckan_default",
+    host: "localhost",
+  }
 ckan_ckanapi_version: 4.5
 ckan_ckanapi_organizations_dump_file: "/tmp/ckanorgsdump.jsonl"
 ckan_ckanapi_users_dump_file: "/tmp/ckanusersdump.jsonl"
@@ -65,7 +68,7 @@ ckan_sysadmin_api_key: "CKAN_SYSADMIN_API_KEY"
 #ckanext_spatial_version: "4ac25f19aa4eb9c798451f5eeb3084f907ccc003"
 ckanext_spatial_version: "v1.0.0"
 ckanext_spatial_src_url: "git+https://github.com/ckan/ckanext-spatial.git@{{ ckanext_spatial_version }}#egg=ckanext-spatial"
-ckanext_harvest_version: "v1.3.1"
+ckanext_harvest_version: "v1.3.0"
 ckanext_harvest_src_url: "git+https://github.com/ckan/ckanext-harvest.git@{{ ckanext_harvest_version }}#egg=ckanext-harvest"
 ckan_datapusher_version: 0.0.16
 ckan_datapusher_src_url: "git+https://github.com/ckan/datapusher.git@{{ ckan_datapusher_version }}#egg=datapusher"
@@ -74,19 +77,21 @@ fix_datapusher_0_0_15_package_conflict: false
 ckanext_geoview_version: 0.0.16
 pycsw_version: 2.4.2
 pycsw_src_url: "git+https://github.com/geopython/pycsw.git@{{ pycsw_version }}#egg=pycsw"
-datastore_db: {
-  username: "datastore_default",
-  password: "datastoredefaultdbpassword",
-  role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
-  name: "datastore_default",
-  host: "localhost"
-}
-pycsw_db: {
-  username: "{{ ckan_db.username }}",
-  password: "{{ ckan_db.password }}",
-  name: "pycsw",
-  host: "localhost"
-}
+datastore_db:
+  {
+    username: "datastore_default",
+    password: "datastoredefaultdbpassword",
+    role_attr_flags: "NOSUPERUSER,NOCREATEDB,NOCREATEROLE",
+    name: "datastore_default",
+    host: "localhost",
+  }
+pycsw_db:
+  {
+    username: "{{ ckan_db.username }}",
+    password: "{{ ckan_db.password }}",
+    name: "pycsw",
+    host: "localhost",
+  }
 ckanext_agsview_version: "31887eed03777cb252d7120030cf60be36e4f5c5"
 ckanext_agsview_src_url: "git+https://github.com/OpenGov-OpenData/ckanext-agsview.git@{{ ckanext_agsview_version }}#egg=ckanext-agsview"
 ckanext_pdfview_version: "6669a93b249413aba6653634849ed5a2eb7cca7a"
