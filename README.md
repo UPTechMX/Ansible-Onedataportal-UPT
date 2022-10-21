@@ -90,7 +90,7 @@ SSH to the target server and perform the following steps:
         cd /opt/ansible-onedataportal
         # become root user
         sudo su
-        ansible-playbook -K -i inventory install_all.yml
+        sudo ansible-playbook -K -i inventory install_all.yml
           BECOME password: enter the user's sudo password
         ```
     * Or one by one
@@ -99,13 +99,13 @@ SSH to the target server and perform the following steps:
         cd /opt/Ansible-Onedataportal-UPT
         # become root user
         sudo su
-        ansible-playbook -K -i inventory 0_provision_server.yml
+        sudo ansible-playbook -K -i inventory 0_provision_server.yml
           BECOME password: enter the user's sudo password
-        ansible-playbook -K -i inventory 1_install_postgresql.yml
-        ansible-playbook -K -i inventory 2_install_solr.yml
-        ansible-playbook -K -i inventory 3_install_ckan.yml
-        ansible-playbook -K -i inventory 4_install_ckan_extras.yml
-        ansible-playbook -K -i inventory 5_install_oskari.yml
+        sudo ansible-playbook -K -i inventory 1_install_postgresql.yml
+        sudo ansible-playbook -K -i inventory 2_install_solr.yml
+        sudo ansible-playbook -K -i inventory 3_install_ckan.yml
+        sudo ansible-playbook -K -i inventory 4_install_ckan_extras.yml
+        sudo ansible-playbook -K -i inventory 5_install_oskari.yml
         ```
     * NOTE: to speed up installation copy `solr-6.5.1.tgz`, `jetty-9.4.12-oskari.zip`, `geoserver-2.13.2-war.zip`, and `oskari-map.war` to /tmp to skip the long tasks for downloading and building
     * Optional: install the development tools for customizing/building Oskari components
@@ -115,9 +115,9 @@ SSH to the target server and perform the following steps:
         cd /opt/Ansible-Onedataportal-UPT
         # become root user
         sudo su
-        ansible-playbook -K -i inventory 1_install_postgresql.yml
+        sudo ansible-playbook -K -i inventory 1_install_postgresql.yml
           BECOME password: enter the user's sudo password
-        ansible-playbook -K -i inventory 6_install_oskari_development.yml
+        sudo ansible-playbook -K -i inventory 6_install_oskari_development.yml
         ```
 * Some manual configuration might be needed to achieve the following (this is optional):
   * Configure firewall to further secure the server
@@ -139,16 +139,16 @@ SSH to the target server and perform the following steps:
   # become root user
   sudo su
   # For Balikpapan
-  ansible-playbook -K -i inventory install_oskari_balikpapan.yml
+  sudo ansible-playbook -K -i inventory install_oskari_balikpapan.yml
   # or for Denpasar
-  ansible-playbook -K -i inventory install_oskari_denpasar.yml
+  sudo ansible-playbook -K -i inventory install_oskari_denpasar.yml
   ```
 * Install the UPT GUI and server extension according to the municipality
   ```
   # For Balikpapan
-  ansible-playbook -K -i inventory install_upt_oskari_satu_integration_bpn.yml
+  sudo ansible-playbook -K -i inventory install_upt_oskari_satu_integration_bpn.yml
   # or for Denpasar
-  ansible-playbook -K -i inventory install_upt_oskari_satu_integration_dps.yml
+  sudo ansible-playbook -K -i inventory install_upt_oskari_satu_integration_dps.yml
   ```
 * Access the One Data Portal at the server's IP address or domain name on a web browser:
   * By default the CKAN Data Portal is accessible at http://the.server.ip.address (reverse proxied by NGINX from http://the.server.ip.address:8090)
