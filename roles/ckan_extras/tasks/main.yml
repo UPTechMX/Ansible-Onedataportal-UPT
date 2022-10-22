@@ -809,53 +809,53 @@
 
 # Setup ckanext-scheming extension
 # https://github.com/ckan/ckanext-scheming.git
-# - name: "Install ckanext-scheming extension from `{{ ckanext_scheming_src_url }}`"
-#   become: true
-#   become_user: "{{ ckan_user.name }}"
-#   pip:
-#     name: "{{ ckanext_scheming_src_url }}"
-#     virtualenv: "{{ ckan_virtualenv }}"
-#     editable: yes
-#     state: present
+- name: "Install ckanext-scheming extension from `{{ ckanext_scheming_src_url }}`"
+  become: true
+  become_user: "{{ ckan_user.name }}"
+  pip:
+    name: "{{ ckanext_scheming_src_url }}"
+    virtualenv: "{{ ckan_virtualenv }}"
+    editable: yes
+    state: present
 
-# - name: "Install ckanext-scheming package requirements from `{{ ckan_virtualenv }}/src/ckanext-scheming/requirements.txt`"
-#   become: true
-#   become_user: "{{ ckan_user.name }}"
-#   pip:
-#     requirements: "{{ ckan_virtualenv }}/src/ckanext-scheming/requirements.txt"
-#     virtualenv: "{{ ckan_virtualenv }}"
-#     state: present
+- name: "Install ckanext-scheming package requirements from `{{ ckan_virtualenv }}/src/ckanext-scheming/requirements.txt`"
+  become: true
+  become_user: "{{ ckan_user.name }}"
+  pip:
+    requirements: "{{ ckan_virtualenv }}/src/ckanext-scheming/requirements.txt"
+    virtualenv: "{{ ckan_virtualenv }}"
+    state: present
 
-# - name: "Add extra ckanext-scheming settings to `{{ ckan_conf_dir }}/production.ini`"
-#   blockinfile:
-#     path: "{{ ckan_conf_dir }}/production.ini"
-#     marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-scheming settings"
-#     insertafter: "## Extra ckanext-scheming settings"
-#     block: |
+- name: "Add extra ckanext-scheming settings to `{{ ckan_conf_dir }}/production.ini`"
+  blockinfile:
+    path: "{{ ckan_conf_dir }}/production.ini"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK Extra ckanext-scheming settings"
+    insertafter: "## Extra ckanext-scheming settings"
+    block: |
 
-#       #### Extra ckanext-scheming settings
-#       scheming.presets = ckanext.onedataportal:presets.json ckanext.repeating:presets.json ckanext.composite:presets.json ckanext.validation:presets.json
-#       scheming.dataset_schemas = ckanext.onedataportal:ckan_dataset.json
-#   notify: reload apache2
+      #### Extra ckanext-scheming settings
+      scheming.presets = ckanext.onedataportal:presets.json ckanext.repeating:presets.json ckanext.composite:presets.json ckanext.validation:presets.json
+      scheming.dataset_schemas = ckanext.onedataportal:ckan_dataset.json
+  notify: reload apache2
 
-# - name: Check if scheming extension is already enabled in production.ini
-#   lineinfile:
-#     dest: "{{ ckan_conf_dir }}/production.ini"
-#     regexp: '^ckan\.plugins.*scheming_datasets.*$'
-#     state: absent
-#   check_mode: yes
-#   changed_when: false
-#   register: scheming_plugin_enabled
+- name: Check if scheming extension is already enabled in production.ini
+  lineinfile:
+    dest: "{{ ckan_conf_dir }}/production.ini"
+    regexp: '^ckan\.plugins.*scheming_datasets.*$'
+    state: absent
+  check_mode: yes
+  changed_when: false
+  register: scheming_plugin_enabled
 
-# - name: Enable scheming extension in production.ini
-#   lineinfile:
-#     dest: "{{ ckan_conf_dir }}/production.ini"
-#     regexp: '^(ckan\.plugins(.*)$)'
-#     backrefs: yes
-#     line: '\1 scheming_datasets'
-#     state: present
-#   when: not scheming_plugin_enabled.found
-#   notify: reload apache2
+- name: Enable scheming extension in production.ini
+  lineinfile:
+    dest: "{{ ckan_conf_dir }}/production.ini"
+    regexp: '^(ckan\.plugins(.*)$)'
+    backrefs: yes
+    line: '\1 scheming_datasets'
+    state: present
+  when: not scheming_plugin_enabled.found
+  notify: reload apache2
 
 # Setup ckanext-repeating extension
 # https://github.com/open-data/ckanext-repeating.git
