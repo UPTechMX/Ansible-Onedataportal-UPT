@@ -8,20 +8,20 @@
     name: "{{ item }}"
     state: present
   with_items:
-   - build-essential
-   - python-pip
-   - python-virtualenv
-   - python-dev
-   - libxslt1-dev
-   - libxml2-dev
-   - zlib1g-dev
-   - libffi-dev
-   - libgeos-c1v5
-   - redis-server
-   - apache2
-   - libapache2-mod-wsgi
-   - libapache2-mod-rpaf
-   - nginx
+    - build-essential
+    - python-pip
+    - python-virtualenv
+    - python-dev
+    - libxslt1-dev
+    - libxml2-dev
+    - zlib1g-dev
+    - libffi-dev
+    - libgeos-c1v5
+    - redis-server
+    - apache2
+    - libapache2-mod-wsgi
+    - libapache2-mod-rpaf
+    - nginx
 
 - name: Temporarily stop Apache service
   service:
@@ -36,7 +36,7 @@
 - name: "Modify Apache to switch listening from port 80 to {{ ckan_apache_virtualhost_port }}"
   lineinfile:
     dest: "/etc/apache2/ports.conf"
-    regexp: '^Listen 80'
+    regexp: "^Listen 80"
     line: "Listen {{ ckan_apache_virtualhost_port }}"
     state: present
   notify: reload apache2
@@ -65,7 +65,7 @@
   when: ckan_user is defined
 
 - pip:
-    name: setuptools==36.1
+    name: setuptools==44.1.1
 
 - name: Upgrade python-pip
   command: pip install --upgrade pip
@@ -162,7 +162,7 @@
 - name: Set app_instance_uuid in production.ini
   lineinfile:
     dest: "{{ ckan_conf_dir }}/production.ini"
-    regexp: '^####app_instance_uuid'
+    regexp: "^####app_instance_uuid"
     line: "app_instance_uuid = {{ app_instance_uuid.stdout }}"
     state: present
   when: app_instance_uuid is defined

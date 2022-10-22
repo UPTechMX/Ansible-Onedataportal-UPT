@@ -68,7 +68,7 @@ ckan_sysadmin_api_key: "CKAN_SYSADMIN_API_KEY"
 #ckanext_spatial_version: "4ac25f19aa4eb9c798451f5eeb3084f907ccc003"
 ckanext_spatial_version: "v1.0.0"
 ckanext_spatial_src_url: "git+https://github.com/ckan/ckanext-spatial.git@{{ ckanext_spatial_version }}#egg=ckanext-spatial"
-ckanext_harvest_version: "v1.2.0"
+ckanext_harvest_version: "v1.3.1"
 ckanext_harvest_src_url: "git+https://github.com/ckan/ckanext-harvest.git@{{ ckanext_harvest_version }}#egg=ckanext-harvest"
 ckan_datapusher_version: 0.0.16
 ckan_datapusher_src_url: "git+https://github.com/ckan/datapusher.git@{{ ckan_datapusher_version }}#egg=datapusher"
