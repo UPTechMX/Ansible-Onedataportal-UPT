@@ -387,7 +387,7 @@
 - name: "Copy Python `slugify.py` file from template"
   template:
     src: ../templates/slugify.py.j2
-    dest: "/usr/lib/ckan/ckan/local/lib/python2.7/site-packages/slugify/slugify.py"
+    dest: "{{ ckan_virtualenv }}/local/lib/python2.7/site-packages/slugify/slugify.py"
     owner: "{{ ckan_user.name }}"
     group: "{{ ckan_user.name }}"
     mode: 0644

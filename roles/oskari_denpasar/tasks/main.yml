@@ -281,7 +281,7 @@
   blockinfile:
     path: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
     block: |
-      
+
       ##################################
       # CKAN-Oskari Integration Setup
       ##################################
@@ -369,3 +369,13 @@
     state: present
     minute: "*/10"
     job: "PATH={{ ckan_virtualenv }}/bin:/bin && {{ ckan_virtualenv }}/bin/python {{ ckan_virtualenv }}/bin/ckanapi search datasets fq=private:true include_private=true -O {{ ckan_ckanapi_datasets_secondary_dump_file }} -c {{ ckan_conf_dir }}/production.ini && chmod 400 {{ ckan_ckanapi_datasets_secondary_dump_file }}"
+
+# Fix slugify.py
+- name: "Copy Python `slugify.py` file from template"
+  template:
+    src: ../templates/slugify.py.j2
+    dest: "{{ ckan_virtualenv }}/local/lib/python2.7/site-packages/slugify/slugify.py"
+    owner: "{{ ckan_user.name }}"
+    group: "{{ ckan_user.name }}"
+    mode: 0644
+    force: yes
