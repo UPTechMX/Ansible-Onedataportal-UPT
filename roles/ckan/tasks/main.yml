@@ -65,7 +65,7 @@
   when: ckan_user is defined
 
 - pip:
-    name: setuptools==44.1.1
+    name: setuptools==36.1
 
 - name: Upgrade python-pip
   command: pip install --upgrade pip
