@@ -52,14 +52,14 @@
       stws.db.port={{ upt_modules.distance_backend_port }}
 
 - name: Cloning UPT-GUI repository
-  git: 
+  git:
     #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-UrbanPerformance.git
     repo: https://github.com/UPTechMx/UPT-GUI.git
     dest: "{{ install_dir_oskari }}/oskari-server/UPT-GUI"
     clone: yes
 
 - name: Cloning UPT-Server-Extension repository
-  git: 
+  git:
     #repo: https://{{ gituser | urlencode }}:{{ gitpassword | urlencode }}@github.com/miguel-capsus/UPT-Distance-Module.git
     repo: https://github.com/UPTechMx/UPT-Server-Extension.git
     dest: "{{ install_dir_oskari }}/oskari-server/UPT-Server-Extension"
@@ -68,7 +68,7 @@
 - name: Run npm install for UPT-GUI dependencies
   shell: |
     cd {{ install_dir_oskari }}/oskari-server/UPT-GUI
-    git checkout satu-integration
+    git checkout idp-geoportal
     npm install
     exit
 
@@ -101,6 +101,6 @@
   become_user: postgres
   become_method: sudo
   environment:
-    PGPASSWORD: '{{ oskari_db_pw }}'
+    PGPASSWORD: "{{ oskari_db_pw }}"
   shell: |
     psql -h localhost -U oskari -f {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension/app-resources/src/main/resources/flyway/example/run-upt-scripts.sql -d oskaridb
