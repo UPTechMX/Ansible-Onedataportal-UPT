@@ -87,7 +87,7 @@ SSH to the target server and perform the following steps:
     * Recommended method: run the install all playbook to install everything in order
       * This will run the playbooks above in correct order from 0 to 6
         ```
-        cd /opt/ansible-onedataportal
+        cd /opt/Ansible-Onedataportal-UPT
         # become root user
         sudo su
         ansible-playbook -K -i inventory install_all.yml
