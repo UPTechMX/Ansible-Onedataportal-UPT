@@ -3,7 +3,7 @@
 # PostgreSQL variables
 #
 
-postgresql_version: 9.6
+postgresql_version: 12
 postgresql_conf_path: "/etc/postgresql/{{ postgresql_version }}/main"
 postgres_user_password: changethispassword
-postgis_version: 2.4
+postgis_version: 2.5
