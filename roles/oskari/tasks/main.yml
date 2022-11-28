@@ -296,15 +296,15 @@
     exit
   with_items:
     - OskariMarkFactory-1.48.0-SNAPSHOT.jar
-    - IntersectionFeatureCollection2-2.13.2.jar
+    - IntersectionFeatureCollection2-2.19.0.jar
     - oskari_point_stacker-2.7.1.jar
-    - ZoneSectorFeatureCollection-2.13.2.jar
+    - ZoneSectorFeatureCollection-2.19.0.jar
     - serializer-2.7.1.jar
     - net.opengis.wps-19.2.jar
     - gt-xsd-wps-19.2.jar
     - gt-process-geometry-19.2.jar
-    - gs-wps-core-2.13.2.jar
-    - gs-web-wps-2.13.2.jar
+    - gs-wps-core-2.19.0.jar
+    - gs-web-wps-2.19.0.jar
 
 - name: "[FIX] Copy bundled GeoServer data directory to `/var/lib/tomcat8/webapps/geoserver` to initialize external GeoServer for Oskari"
   shell: |
