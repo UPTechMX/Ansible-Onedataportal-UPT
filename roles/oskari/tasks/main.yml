@@ -52,9 +52,9 @@
     creates: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties.orig"
 
 - name: Backup `start.ini` Jetty settings file if backup file `start.ini.orig` does not exist
-  shell: "cp {{ install_dir_oskari }}/jetty-distribution-9.4.12.v20180830/start.ini {{ install_dir_oskari }}/jetty-distribution-9.4.12.v20180830/start.ini.orig"
+  shell: "cp {{ install_dir_oskari }}/jetty-distribution-9.4.44.v20210927/start.ini {{ install_dir_oskari }}/jetty-distribution-9.4.44.v20210927/start.ini.orig"
   args:
-    creates: "{{ install_dir_oskari }}/jetty-distribution-9.4.12.v20180830/start.ini.orig"
+    creates: "{{ install_dir_oskari }}/jetty-distribution-9.4.44.v20210927/start.ini.orig"
 
 - name: Backup `oskari_lang_id.js` file in `geoportal` if backup file `oskari_lang_id.js.orig` does not exist
   shell: "cp {{ install_dir_oskari }}/oskari-server/sample-application/dist/{{ oskari_client_version }}/geoportal/oskari_lang_id.js {{ install_dir_oskari }}/oskari-server/sample-application/dist/{{ oskari_client_version }}/geoportal/oskari_lang_id.js.orig"
@@ -92,7 +92,7 @@
 - name: Copy `start.ini` settings file for Jetty from template
   template:
     src: ../templates/start.ini.j2
-    dest: "{{ install_dir_oskari }}/jetty-distribution-9.4.12.v20180830/start.ini"
+    dest: "{{ install_dir_oskari }}/jetty-distribution-9.4.44.v20210927/start.ini"
     owner: root
     group: root
     mode: 0644
@@ -334,7 +334,7 @@
     # name: "start oskari"
     # state: present
     # special_time: reboot
-    # job: "cd {{ install_dir_oskari }}/oskari-server && java -jar ../jetty-distribution-9.4.12.v20180830/start.jar >> /var/log/oskari_server.log 2>&1"
+    # job: "cd {{ install_dir_oskari }}/oskari-server && java -jar ../jetty-distribution-9.4.44.v20210927/start.jar >> /var/log/oskari_server.log 2>&1"
 
 - name: "Copy `jetty.service` systemd unit file for Oskari from template"
   template:
