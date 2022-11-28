@@ -2,14 +2,14 @@
 - name: Run `6_install_oskari_development.yml` playbook requirement
   import_playbook: 6_install_oskari_development.yml
 
-- name: "Setup Denpasar municipality version of Oskari {{ oskari_version }}"
+- name: "Setup Balikpapan municipality version of Oskari {{ oskari_version }}"
   hosts: all
   become: true
 
   vars_files:
     - vars_ckan.yml
     - vars_oskari.yml
-    - vars_oskari_denpasar.yml
+    - vars_oskari_extension.yml
 
   roles:
-    - oskari_denpasar
+    - oskari_extension

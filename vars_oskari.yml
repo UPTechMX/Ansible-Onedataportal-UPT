@@ -6,22 +6,22 @@
 install_dir: /opt
 install_dir_oskari: "{{ install_dir }}/oskari"
 working_dir: /tmp
-oskari_jetty_bundle_archive: jetty-9.4.12-oskari.zip
+oskari_jetty_bundle_archive: oskari-2.6.0.zip
 #oskari_jetty_bundle_archive_url: "https://www.oskari.org/build/server/{{ oskari_jetty_bundle_archive }}"
 # use github repo mirror
 #oskari_jetty_bundle_archive_url: "https://github.com/geoenvo/ansible-onedataportal/releases/download/mirror_oskari/{{ oskari_jetty_bundle_archive }}"
 #oskari_jetty_bundle_archive_url: "https://github.com/geoenvo/ansible-onedataportal/releases/download/mirror_oskari_1.55.2/{{ oskari_jetty_bundle_archive }}"
 oskari_domain: "http://192.168.1.200:8080"
-oskari_version: 1.55.2
-oskari_client_version: 1.2.1
-oskari_jetty_bundle_archive_url: "https://github.com/geoenvo/ansible-onedataportal/releases/download/mirror_oskari_{{ oskari_version }}/{{ oskari_jetty_bundle_archive }}"
+oskari_version: 2.6.0
+oskari_client_version: 1.20.0
+oskari_jetty_bundle_archive_url: "http://download.osgeo.org/oskari/{{ oskari_jetty_bundle_archive }}"
 #oskari_locales: "en_US,fi_FI,sv_SE,es_ES,in_ID"
 oskari_locales: "en_US,in_ID"
 oskari_development_node_version: 14
-geoserver_version: 2.13.2
+geoserver_version: 2.19.0
 geoserver_war_archive: "geoserver-{{ geoserver_version }}-war.zip"
 #geoserver_war_archive_url: "http://sourceforge.net/projects/geoserver/files/GeoServer/{{ geoserver_version }}/{{ geoserver_war_archive }}"
-geoserver_war_archive_url: "https://github.com/geoenvo/ansible-onedataportal/releases/download/mirror_geoserver_war/{{ geoserver_war_archive }}"
+geoserver_war_archive_url: "https://sourceforge.net/projects/geoserver/files/GeoServer/{{ geoserver_version }}/{{ geoserver_war_archive }}"
 geoserver_port: 8082
 oskari_db:
   {

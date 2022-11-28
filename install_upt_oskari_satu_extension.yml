@@ -8,4 +8,4 @@
     - vars_oskari.yml
 
   roles:
-    - upt_satu_dps
+    - upt_satu_extension

@@ -80,12 +80,12 @@
 
 - name: Copy build artifacts to oskari-frontend
   shell: |
-    cp -r {{ install_dir_oskari }}/oskari-server/UPT-GUI/dist/PLID {{ install_dir_oskari }}/oskari-server/oskari-application-bpn/dist/wbidp/geoportal
+    cp -r {{ install_dir_oskari }}/oskari-server/UPT-GUI/dist/PLID {{ install_dir_oskari }}/oskari-server/oskari-application/dist/wbidp/geoportal
 
 - name: Checkout UPT-Server-Extension for SatuDataportal
   shell: |
     cd {{ install_dir_oskari }}/oskari-server/UPT-Server-Extension
-    git checkout satu-integration-bpn
+    git checkout migration-tests
     exit
 
 - name: Build oskari-map.war file

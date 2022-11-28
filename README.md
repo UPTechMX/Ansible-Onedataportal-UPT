@@ -53,6 +53,8 @@ SSH to the target server and perform the following steps:
   sudo su
   git clone https://github.com/UPTechMX/Ansible-Onedataportal-UPT.git
   cd Ansible-Onedataportal-UPT
+  # Switch to migration branch
+  git checkout migration
   ```
 * Configure the mandatory playbook variables
   * ```nano vars_provision_server.yml```
@@ -133,22 +135,16 @@ SSH to the target server and perform the following steps:
   ```
   sudo reboot
   ```
-* Install the oskari application and server extension for a municipality
+* Install the oskari application and server extension
   ```
   cd /opt/Ansible-Onedataportal-UPT
   # become root user
   sudo su
-  # For Balikpapan
-  ansible-playbook -K -i inventory install_oskari_balikpapan.yml
-  # or for Denpasar
-  ansible-playbook -K -i inventory install_oskari_denpasar.yml
+  ansible-playbook -K -i inventory install_oskari_extension.yml
   ```
-* Install the UPT GUI and server extension according to the municipality
+* Install the UPT GUI and server extension
   ```
-  # For Balikpapan
-  sudo ansible-playbook -K -i inventory install_upt_oskari_satu_integration_bpn.yml
-  # or for Denpasar
-  sudo ansible-playbook -K -i inventory install_upt_oskari_satu_integration_dps.yml
+  sudo ansible-playbook -K -i inventory install_upt_oskari_satu_extension.yml
   ```
 * Access the One Data Portal at the server's IP address or domain name on a web browser:
   * By default the CKAN Data Portal is accessible at http://the.server.ip.address (reverse proxied by NGINX from http://the.server.ip.address:8090)
