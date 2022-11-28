@@ -15,8 +15,8 @@
     clone: yes
     update: yes
 
-#- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/geoenvo/oskari-application/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application`"
-- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/UPTechMX/oskari-application/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application`"
+#- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/UPTechMX/oskari-application/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/oskari-application`"
+- name: "Clone Oskari Balikpapan frontend application repo from `https://github.com/UPTechMX/oskari-application/` to `{{ install_dir_oskari }}/oskari-server/oskari-application`"
   git:
     repo: https://github.com/UPTechMX/oskari-application.git
     dest: "{{ install_dir_oskari }}/oskari-server/oskari-application"
@@ -192,9 +192,9 @@
     line: "oskari.client.version=dist/{{ oskari_new_client_version }}"
     state: present
 
-- name: "Clone Oskari Balikpapan server extension repo from `https://github.com/geoenvo/ckanoskari-server-extension/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/ckanoskari-server-extension`"
+- name: "Clone Oskari Balikpapan server extension repo from `https://github.com/UPTechMX/ckanoskari-server-extension/` (wb-idp branch) to `{{ install_dir_oskari }}/oskari-server/ckanoskari-server-extension`"
   git:
-    repo: https://github.com/geoenvo/ckanoskari-server-extension.git
+    repo: https://github.com/UPTechMX/ckanoskari-server-extension.git
     dest: "{{ install_dir_oskari }}/oskari-server/ckanoskari-server-extension"
     version: "wb-idp"
     clone: yes
