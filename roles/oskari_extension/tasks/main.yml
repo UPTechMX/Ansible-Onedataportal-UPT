@@ -197,7 +197,6 @@
   git:
     repo: https://github.com/geoenvo/ckanoskari-server-extension.git
     dest: "{{ install_dir_oskari }}/oskari-server/ckanoskari-server-extension"
-    version: "wb-idp"
     clone: yes
     update: yes
 
