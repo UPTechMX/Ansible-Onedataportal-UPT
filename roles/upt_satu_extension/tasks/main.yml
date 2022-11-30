@@ -4,18 +4,18 @@
   args:
     creates: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties.orig"
 
-- name: "Enable custom user service `org.oskari.example.util.DatabaseUserServiceCKAN` bundle in `oskari.user.service` in Oskari settings"
+- name: "Enable custom user service `org.oskari.upt.util.DatabaseUserServiceCKAN` bundle in `oskari.user.service` in Oskari settings"
   lineinfile:
     dest: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
     regexp: 'oskari\.user\.service(.*)$'
-    line: "oskari.user.service=org.oskari.example.util.DatabaseUserServiceCKAN"
+    line: "oskari.user.service=org.oskari.upt.util.DatabaseUserServiceCKAN"
     state: present
 
-- name: "Add example module to the oskari-ext.properties"
+- name: "Add example upt to the oskari-ext.properties"
   lineinfile:
     dest: "{{ install_dir_oskari }}/oskari-server/resources/oskari-ext.properties"
     regexp: 'db\.additional\.modules(.*)$'
-    line: "db.additional.modules=myplaces, userlayer, wbidp, example"
+    line: "db.additional.modules=myplaces, userlayer, wbidp, upt"
     state: present
 
 - name: "Add autorepair"
